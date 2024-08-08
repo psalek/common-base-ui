@@ -1,0 +1,20 @@
+<div th:fragment="entries">
+    <form th:action="@{${entryLinkForm}}" id="searchForm" class="d-flex flex-wrap align-items-center justify-content-end mb-2">
+
+        <!--/* Optional. If not necessary, create an Empty map in the model. */-->
+        <div th:block th:each="hiddenParam : ${entryHiddenParams}">
+            <input type="hidden" th:name="${hiddenParam.key}" th:value="${hiddenParam.value}" />
+        </div>
+
+        <div class="d-flex align-items-center mt-2 mr-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="pageSize">Items per page:</label>
+                </div>
+                <select form="searchForm" name="size" th:value="${pageSize}" onchange="changePageSize()" class="size-select custom-select" id="pageSize" style="width: auto;">
+                    <option th:each="s : ${ {20,50,100,200} }" th:value="${s}" th:text="${s}" th:selected="${s == pageSize}"></option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>

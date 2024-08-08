@@ -1,0 +1,10 @@
+<ul th:fragment="navbarMenu(navbarMenu, styleModifier, textColor)" class="navbar-nav ms-auto">
+  <li th:each="item : ${navbarMenu}" class="nav-item dropdown">
+    <a th:href="${item.url}" class="nav-link me-10" th:text="${item.title}" aria-expanded="false"></a>
+    <ul class="dropdown-menu bg-gradient" th:classappend="${styleModifier}" th:if="${item.subItems}">
+      <li th:each="subItem : ${item.subItems}">
+        <a class="dropdown-item" th:classappend="${textColor}" th:href="${subItem.url}" th:text="${subItem.title}"></a>
+      </li>
+    </ul>
+  </li>
+</ul>

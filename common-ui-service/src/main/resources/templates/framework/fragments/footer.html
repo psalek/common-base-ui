@@ -1,0 +1,33 @@
+<footer th:fragment="common-footer">
+    <nav class="navbar navbar-expand-md bg-gradient navbar-light footer-nav" style="background-color: rgba(237,237,237,1)">
+        <div class="container-fluid">
+            <div class="row w-100">
+
+                <div class="col d-flex align-items-center">
+                    <div class="navbar-text">
+                        <span class="nav flex-column" th:text="${footerName}"></span>
+                    </div>
+                </div>
+
+
+                <div class="col d-flex justify-content-end align-items-center">
+
+                    <div th:replace="${showNavbarMenuFragment} ? ~{framework/fragments/navbar-links :: navbarMenu(${navbarMenu}, ${styleModifierFooter}, ${textColorFooter})} : ~{}" class="me-auto"></div>
+
+                    <!--/* Footer Extension Fragment in case custom logic needs to be added */-->
+                    <th:block th:replace="~{__${footerExtensionFragment}__}"></th:block>
+
+
+                    <div>
+                        <img class="navbar-brand" th:src="@{/images/footertree.png}" style="width:40px;"/>
+                    </div>
+                    <div class="navbar-text">
+                        <span class="nav flex-column p-0">Maharishi</span>
+                        <span class="nav flex-column p-0">International</span>
+                        <span class="nav flex-column p-0">University</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</footer>

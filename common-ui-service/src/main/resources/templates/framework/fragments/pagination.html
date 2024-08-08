@@ -1,0 +1,42 @@
+<nav class="mt-3 mb-4" th:fragment="pagination">
+  <ul class="pagination justify-content-center">
+    <!--/* Optional: Extra Button One */-->
+    <li th:if="${paginationExtraButtonOneEnabled}" class="page-item">
+      <a class="page-link" th:href="@{${paginationExtraButtonOneLink}}" th:text="${paginationExtraButtonOneText}"></a>
+    </li>
+
+    <!--/* Conditional First Page Link, shown when you are beyond the first 5 pages */-->
+    <li th:if="${page.number >= 5}" class="page-item">
+      <a class="page-link" th:href="${paginationPath + '&page=0&size=' + page.size + '&sort=id,desc'}">First</a>
+    </li>
+
+    <!--/* Conditional Previous Button */-->
+    <li class="page-item" th:if="${page.number > 0}" th:classappend="${page.first} ? 'disabled' : ''">
+      <a class="page-link" th:href="${paginationPath + '&page=' + (page.number - 1) + '&size=' + page.size + '&sort=id,desc'}">Previous</a>
+    </li>
+
+    <!--/* Dynamic Page Numbers */-->
+    <th:block th:with="isNearStart=${page.number < 5}, isNearEnd=${page.totalPages - page.number <= 5},
+                        start=${isNearStart ? 0 : (isNearEnd ? page.totalPages - 5 : page.number - 2)},
+                        end=${isNearEnd ? page.totalPages : (isNearStart ? 5 : page.number + 3)}">
+      <li th:each="i : ${#numbers.sequence(start, end - 1)}" th:class="${i == page.number} ? 'page-item active' : 'page-item'">
+        <a class="page-link" th:href="${paginationPath + '&page=' + i + '&size=' + page.size + '&sort=id,desc'}" th:text="${i + 1}"></a>
+      </li>
+    </th:block>
+
+    <!--/* Conditional Next Button */-->
+    <li class="page-item" th:if="${!page.last}" th:classappend="${page.last} ? 'disabled' : ''">
+      <a class="page-link" th:href="${paginationPath + '&page=' + (page.number + 1) + '&size=' + page.size + '&sort=id,desc'}">Next</a>
+    </li>
+
+    <!--/* Conditional Last Page Link */-->
+    <li th:if="${page.number + 5 < page.totalPages}" class="page-item">
+      <a class="page-link" th:href="${paginationPath + '&page=' + (page.totalPages - 1) + '&size=' + page.size + '&sort=id,desc'}">Last</a>
+    </li>
+
+    <!--/* Optional: Extra Button Two */-->
+    <li th:if="${paginationExtraButtonTwoEnabled}" class="page-item">
+      <a class="page-link" th:href="@{${paginationExtraButtonTwoLink}}" th:text="${paginationExtraButtonTwoText}"></a>
+    </li>
+  </ul>
+</nav>

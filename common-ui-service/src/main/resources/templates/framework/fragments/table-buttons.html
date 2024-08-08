@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg" aria-label="Page navigation example" th:fragment="table-buttons">
+    <ul class="pagination ms-auto">
+        <li th:if="${buttonsEnable}" class="page-item">
+            <form th:action="@{${buttonPreviousLink}(${startDateVariableName}=${startDate})}">
+                <button type="submit" th:name="distance" th:value="${distance}"
+                        th:class="${selectedButton == 'previous' ? 'custom-btn-selected' : 'custom-btn'} + ' shadow-sm me-1 mt-2'">Previous</button>
+            </form>
+        </li>
+        <li th:if="${buttonsEnable}" class="page-item">
+            <form th:action="@{${buttonCurrentLink}}">
+                <button type="submit" th:name="distance" th:value="${distance}"
+                        th:class="${selectedButton == 'current' ? 'custom-btn-selected' : 'custom-btn'} + ' shadow-sm mx-1 mt-2'">Current</button>
+            </form>
+        </li>
+        <li th:if="${buttonsEnable}" class="page-item">
+            <form th:action="@{${buttonNextLink}(${startDateVariableName}=${startDate})}">
+                <button type="submit" th:name="distance" th:value="${distance}"
+                        th:class="${selectedButton == 'next' ? 'custom-btn-selected' : 'custom-btn'} + ' shadow-sm ms-1 mt-2'">Next</button>
+            </form>
+        </li>
+    </ul>
+</nav>

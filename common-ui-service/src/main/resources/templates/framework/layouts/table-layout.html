@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+
+    <!--/* You can add a Custom Head as needed. showDefaultHead needs to be false while you build your view */-->
+    <head th:replace="${showDefaultHead} ? ~{framework/fragments/head :: common-head} : ~{__${customHead}__}"></head>
+
+    <body th:class="${tabletBodyClassConfiguration}">
+
+        <!--/* You can add a Custom Header as needed. showDefaultHeader needs to be false while you build your view */-->
+        <div th:replace="${showDefaultHeader} ? ~{framework/fragments/header :: common-header} : ~{__${customHeader}__}"></div>
+
+        <!--/* Extra Table Fragment One to extend the layout right after the Header fragment if necessary */-->
+        <th:block th:replace="~{__${extraTableFragmentOne}__}"></th:block>
+
+        <main th:class="${tabletContainerClassConfiguration}">
+
+            <!--/* Extra Table Fragment Two to extend the layout right before the Main Title fragment if necessary */-->
+            <th:block th:replace="~{__${extraTableFragmentTwo}__}"></th:block>
+
+            <!--/* You can add a Custom Main Title as needed. showDefaultMainTitle needs to be false while you build your view */-->
+            <div th:replace="${showDefaultMainTitle} ? ~{framework/fragments/main-title :: common-main-title} : ~{__${customMainTitle}__}"></div>
+
+            <!--/* Extra Table Fragment Three to extend the layout right after the Main Title fragment if necessary */-->
+            <th:block th:replace="~{__${extraTableFragmentThree}__}"></th:block>
+
+            <div class="navbar navbar-expand-md navbar-dark">
+                <div class="d-flex justify-content-between w-100">
+                    <div>
+                        <div th:replace="${showDefaultNavigationMenu} ? ~{framework/fragments/navigation-menu :: common-navigation-menu} : ~{__${customNavigationMenu}__}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--/* You can add a Custom Search Box as needed. showDefaultSearchBox needs to be false while you build your view */-->
+            <div th:replace="${showDefaultSearchBox} ? ~{framework/fragments/search-box :: common-search-box} : ~{__${customSearchBox}__}"></div>
+
+            <!--/* Extra Table Fragment Four to extend the layout right before the Table fragment if necessary */-->
+            <th:block th:replace="~{__${extraTableFragmentFour}__}"></th:block>
+
+            <!--/* You can add a Custom Table as needed. showDefaultTable needs to be false while you build your view */-->
+            <div th:replace="${showDefaultTable} ? ~{framework/fragments/table :: common-table} : ~{__${customTable}__}"></div>
+
+            <!--/* Extra Table Fragment Five to extend the layout right after the Table fragment if necessary */-->
+            <th:block th:replace="~{__${extraTableFragmentFive}__}"></th:block>
+
+        </main>
+
+        <!--/* Extra Table Fragment Five to extend the layout right before the Footer fragment if necessary */-->
+        <th:block th:replace="~{__${extraTableFragmentSix}__}"></th:block>
+
+        <!--/* You can add a Custom Footer as needed. showDefaultFooter needs to be false while you build your view */-->
+        <div th:replace="${showDefaultFooter} ? ~{framework/fragments/footer :: common-footer} : ~{__${customFooter}__}"></div>
+
+        <!--/* Extra Table Fragment Five to extend the layout right after the Footer fragment if necessary */-->
+        <th:block th:replace="~{__${extraTableFragmentSeven}__}"></th:block>
+
+    </body>
+</html>

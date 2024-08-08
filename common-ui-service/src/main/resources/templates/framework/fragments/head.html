@@ -1,0 +1,37 @@
+<head th:fragment="common-head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <!--/* Head Extension Fragment in case more configuration is necessary */-->
+  <th:block th:replace="~{__${headExtensionFragment}__}"></th:block>
+
+  <title th:text="${headTitle}"></title>
+
+  <!--/* Bootstrap CSS */-->
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+
+  <!--/* Bootstrap Icons */-->
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css}" />
+
+  <!--/* Custom CSS */-->
+  <link  th:if="${withCommonCss}" rel="stylesheet" href="/css/common.css" th:href="@{/css/common.css}" />
+
+  <!--/* CSS Extension Fragment in case more CSS links needs to be added */-->
+  <th:block th:replace="~{__${cssExtensionFragment}__}"></th:block>
+
+  <!--/* jQuery  */-->
+  <script type="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+
+  <!--/* Bootstrap Bundle JS (includes Popper) */-->
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+
+  <!--/* Custom JS */-->
+  <script th:if="${withCommonJs}" th:src="@{/js/common.js}"></script>
+
+  <!--/* JS Extension Fragment in case more JS links needs to be added */-->
+  <th:block th:replace="~{__${jsExtensionFragment}__}"></th:block>
+
+</head>

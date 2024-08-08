@@ -1,0 +1,16 @@
+<div th:fragment="response-message" style="display: flex; justify-content: center;">
+    <div th:if="${successfulMessage}"
+         id="successAlert"
+         class="alert alert-success mb-5 d-flex flex-column align-items-center text-dark font-bold"
+         style="display: inline-block; margin-bottom: 20px;">
+        <p th:text="${successfulMessage}" class="mb-3 text-nowrap"></p>
+        <button type="button" class="btn btn-secondary" onclick="dismissMessage('successAlert')">Ok</button>
+    </div>
+    <div th:if="${errorMessage}"
+         id="errorAlert"
+         class="alert alert-danger mb-5 d-flex flex-column align-items-center text-dark font-bold"
+         style="display: inline-block; margin-bottom: 20px;">
+        <p th:text="${errorMessage}" class="mb-3 text-nowrap"></p>
+        <button type="button" class="btn btn-secondary" onclick="dismissMessage('errorAlert')">Ok</button>
+    </div>
+</div>

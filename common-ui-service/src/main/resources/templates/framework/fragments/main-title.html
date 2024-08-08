@@ -1,0 +1,25 @@
+<div th:fragment="common-main-title">
+    <div class="row">
+
+        <!--/* Main Tittle Extension Fragment One in case more HTML logic needs to be added at the beginning */-->
+        <th:block th:replace="~{__${mainTitleExtensionFragmentOne}__}"></th:block>
+
+        <div class="col">
+            <p class="fw fw-bold flex-column mt-4 mb-0 text-nowrap" style="font-size: 26px; color: rgba(17,17,17,1);" th:text="${mainTitle}"></p>
+            <nav aria-label="breadcrumb" class="custom-breadcrumb-divider">
+                <ol class="breadcrumb">
+                    <li th:each="crumbEntry, iterStat : ${breadCrumbList.entrySet()}"
+                        th:class="${iterStat.last ? 'breadcrumb-item active mt-2' : 'breadcrumb-item mt-2'}"
+                        th:aria-current="${iterStat.last ? 'page' : ''}"> [[${iterStat.last ? crumbEntry.value.name : ''}]]
+                        <a th:unless="${iterStat.last}" th:href="@{${crumbEntry.value.link}}" th:text="${crumbEntry.value.name}">Link</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+
+        <!--/* Main Tittle Extension Fragment Two in case more HTML logic needs to be added at the end */-->
+        <th:block th:replace="~{__${mainTitleExtensionFragmentTwo}__}"></th:block>
+
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+
+    <!--/* You can add a Custom Head as needed. showDefaultHead needs to be false while you build your view */-->
+    <head th:replace="${showDefaultHead} ? ~{framework/fragments/head :: common-head} : ~{__${customHead}__}"></head>
+
+    <body th:class="${standardBodyClassConfiguration}">
+
+        <!--/* You can add a Custom Header as needed. showDefaultHeader needs to be false while you build your view */-->
+        <div th:replace="${showDefaultHeader} ? ~{framework/fragments/header :: common-header} : ~{__${customHeader}__}"></div>
+
+        <!--/* Extra Standard Fragment One to extend the layout right after the header */-->
+        <th:block th:replace="~{__${extraStandardFragmentOne}__}"></th:block>
+
+        <main th:class="${standardContainerClassConfiguration}">
+
+            <!--/* Extra Standard Fragment Two to extend the layout right before the Main Title fragment if necessary */-->
+            <th:block th:replace="~{__${extraStandardFragmentTwo}__}"></th:block>
+
+            <!--/* You can add a Custom Main Title as needed. showDefaultMainTitle needs to be false while you build your view */-->
+            <div th:replace="${showDefaultMainTitle} ? ~{framework/fragments/main-title :: common-main-title} : ~{__${customMainTitle}__}"></div>
+
+            <!--/* Extra Standard Fragment Three to extend the layout right after the Main Title fragment if necessary */-->
+            <th:block th:replace="~{__${extraStandardFragmentThree}__}"></th:block>
+
+            <!--/* Content One is optional for the developer to extend the standard layout with custom HTML as needed. */-->
+            <div th:replace="~{this :: content-one}"></div>
+
+        </main>
+
+        <!--/* Extra Standard Fragment Four to extend the layout right before the Footer fragment if necessary */-->
+        <th:block th:replace="~{__${extraStandardFragmentFour}__}"></th:block>
+
+        <!--/* You can add a Custom Footer as needed. showDefaultFooter needs to be false while you build your view */-->
+        <div th:replace="${showDefaultFooter} ? ~{framework/fragments/footer :: common-footer} : ~{__${customFooter}__}"></div>
+
+        <!--/* Extra Standard Fragment Five to extend the layout right after the Footer fragment if necessary */-->
+        <th:block th:replace="~{__${extraStandardFragmentFive}__}"></th:block>
+
+    </body>
+</html>

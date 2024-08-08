@@ -1,0 +1,51 @@
+<header th:fragment="common-header">
+    <nav class="navbar navbar-expand-md bg-gradient navbar-dark" style="background-color: rgba(23,33,62,1)">
+        <div class="container-fluid">
+            <div class="row align-items-center w-100">
+
+                <div class="col d-flex justify-content-start align-items-center">
+
+                    <!--/* Header Extension Fragment One in case more HTML logic needs to be added at the beginning */-->
+                    <th:block th:replace="~{__${headerExtensionFragmentOne}__}"></th:block>
+
+                    <div>
+                        <a th:href="${withHeaderHomeLink}">
+                            <img class="navbar-brand" th:src="@{/images/headertree.png}" style="width:40px;"/>
+                        </a>
+                    </div>
+                    <div class="navbar-text">
+                        <a th:href="${withHeaderHomeLink}" class="nav flex-column text-light" style="text-decoration: none;">
+                            <span>Maharishi International University</span>
+                            <span th:text="${headerDepartment}"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!--/* Header Extension Fragment Two in case more HTML logic needs to be added in the middle */-->
+                <div class="col-auto">
+                    <th:block th:replace="~{__${headerExtensionFragmentTwo}__}"></th:block>
+                </div>
+                <div class="col-auto">
+                    <div th:replace="${showNavbarMenuFragment} ? ~{framework/fragments/navbar-links :: navbarMenu(${navbarMenu}, ${styleModifierHeader}, ${textColorHeader})} : ~{}"></div>
+                </div>
+                <div class="col-auto">
+                    <div th:if="${showHeaderSearchBox}" class="d-flex justify-content-center align-items-center">
+                        <form th:action="__${searchBoxPath}__" method="post" class="form-inline my-2 my-lg-0">
+                            <div class="search">
+                                <input class="form-control my-form-control mr-sm-2 rounded-pill" type="search" th:name="${searchBoxName}" th:placeholder="${searchBoxPlaceholder}" aria-label="Search" required>
+                                <button class="btn my-btn my-2 my-sm-0 rounded-circle" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--/* Header Extension Fragment Three in case more HTML logic needs to be added at the end */-->
+                <div class="col-auto ms-auto">
+                    <th:block th:replace="~{__${headerExtensionFragmentThree}__}"></th:block>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

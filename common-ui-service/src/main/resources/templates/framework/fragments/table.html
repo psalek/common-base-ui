@@ -1,0 +1,67 @@
+<div class="table-responsive" th:fragment="common-table">
+    <table id="table" class="table table-hover">
+        <thead class="p-3 mb-2 table-hover">
+        <tr>
+            <th>
+                <input th:if="${not #lists.isEmpty(tableList)}" type="checkbox" id="selectAllCheckbox"/>
+            </th>
+
+            <th></th>
+
+            <!--/* th class and classappend has some conditional logic based on header names and requirements */-->
+            <th th:if="${not #lists.isEmpty(tableList)}" th:each="headerName, iterStat: ${headerNames}"
+
+                th:class="${'column' + iterStat.index} + ' text-nowrap'"
+                th:classappend="${(nonSortable != null && #lists.contains(nonSortable, headerName))} ? '' : ' sortable ' +
+                ${#lists.contains(headerColumnTextCenterList, headerName) ? 'text-center' : ''}"
+
+                th:text="${headerName}"
+                th:attr="data-sort-order=asc">
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="content,iterStat : ${tableList}">
+            <td>
+                <input class="rowCheckbox" type="checkbox"/>
+            </td>
+            <td th:class="'table-light text-center'" th:text="${iterStat.count}"></td>
+
+            <!--/* th class and classappend has some conditional logic based on header names and requirements
+                    span tags make the row values hyperlink text as needed */-->
+            <td th:each="attributeName, iterStat2: ${attributeNames}"
+
+                th:with="value=${commonUtils.getValueByHeader(content, attributeName)},
+                    link=${attributeName == absolutePathName && commonUtils.mapHasKey(absolutePathLinks, commonUtils.getValueByHeader(content, attributeName))
+                     ? absolutePathLinks[commonUtils.getValueByHeader(content, attributeName)]
+                     : null}"
+
+                th:class="'text-nowrap ' + ${'column' + iterStat2.index} + ' '"
+                th:classappend="${commonUtils.settingRowBackGroundColor(content)} + ' ' + ${#lists.contains(columnTextCenterList, attributeName) ? ' text-center' : ''}">
+
+                <span th:if="${columnLinkEnable && attributeName == headerColumnName}">
+                    <a th:href="@{${pathColumnName}(${columnParamVariable}=${value})}"
+                       th:text="${rowHyperlinkMap.containsKey(attributeName) ? rowHyperlinkMap.get(attributeName) : value}">
+                    </a>
+                </span>
+                        <span th:unless="${(link != null && attributeName == absolutePathName) || (columnLinkEnable && attributeName == headerColumnName)}" th:text="${value}"></span>
+                        <span th:if="${link != null && attributeName == absolutePathName}">
+                    <a th:href="@{${link}}" th:text="${value}" target="_blank"></a>
+                </span>
+            </td>
+
+            <!--/* th class has some conditional logic based on header names and requirements
+                    span tags make the row values hyperlink text as needed */-->
+            <td th:each="path, iterStat : ${paths}"
+
+                th:class="'text-nowrap ' +  ${commonUtils.settingRowBackGroundColor(content)} + ' text-center ' + ${'column' + (#lists.size(headerNames) - (iterStat.index + 1))}"
+
+                th:with="value=${#strings.isEmpty(tableListAttribute) ? '' : commonUtils.getValueByHeader(content, tableListAttribute)}">
+                <a th:if="${not #strings.isEmpty(path) && not #strings.isEmpty(pathVariableName)}" th:href="@{${path}(${pathVariableName}=${value})}" th:text="View"></a>
+                <a th:if="${not #strings.isEmpty(path) && #strings.isEmpty(pathVariableName)}" th:href="@{${path}}" th:text="View"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="fs-5 fw-bold text-center" th:if="${#lists.isEmpty(tableList)}">No records found.</p>
+</div>
